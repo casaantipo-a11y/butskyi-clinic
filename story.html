@@ -387,6 +387,24 @@
     .nav-logo-desktop { display: block; }
     .nav-logo-mobile { display: none; height: 34px; width: auto; max-width: 140px; object-fit: contain; }
 
+    /* ── Mobile-only nav title ── */
+    .nav-mobile-title {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      pointer-events: none;
+      line-height: 1;
+    }
+
     /* ── Hamburger button ── */
     .nav-burger {
       display: none;
@@ -463,15 +481,17 @@
       /* Nav: logo swap on mobile */
       .nav-logo-desktop { display: none !important; }
       .nav-logo-mobile { display: block; }
-      .nav-brand { align-items: center; justify-content: center; }
-      .nav-logo-mobile { margin-left: 3rem; }
+      .nav-brand { align-items: flex-start; justify-content: flex-start; }
+      .nav-mobile-title { display: block; }
+      .nav-cta-wrap { grid-column: 3; }
       .nav-burger { margin-top: 4px; }
 
       /* Nav: remove fixed min-width, show burger */
       nav {
         min-width: unset;
         width: calc(100% - 2rem);
-        grid-template-columns: 1fr auto;
+        grid-template-columns: auto 1fr auto;
+        position: relative;
         padding-top: env(safe-area-inset-top, 0.4rem);
       }
       .nav-links { display: none; }
@@ -560,6 +580,7 @@
     </svg>
     <img class="nav-logo-mobile" src="https://klinika.org.ua/wp-content/uploads/2021/12/logo-klinika.png" alt="Клініка Буцького" loading="lazy">
   </a>
+  <span class="nav-mobile-title" aria-hidden="true">Butskyi Clinic</span>
   <ul class="nav-links">
     <li><a href="#prologue">Про нас</a></li>
     <li><a href="#principles">Підхід</a></li>
