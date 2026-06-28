@@ -384,7 +384,8 @@
     /* ════════════════════════ RESPONSIVE ════════════════════════ */
 
     /* ── Nav logo switcher ── */
-    .nav-logo-mobile { display: none; height: 30px; width: auto; }
+    .nav-logo-desktop { display: block; }
+    .nav-logo-mobile { display: none; height: 34px; width: auto; max-width: 140px; object-fit: contain; }
 
     /* ── Hamburger button ── */
     .nav-burger {
@@ -460,7 +461,7 @@
     /* ── Tablet ≤900px ── */
     @media (max-width: 900px) {
       /* Nav: logo swap on mobile */
-      .nav-logo-desktop { display: none; }
+      .nav-logo-desktop { display: none !important; }
       .nav-logo-mobile { display: block; }
 
       /* Nav: remove fixed min-width, show burger */
@@ -548,7 +549,7 @@
 
 <nav>
   <a href="index.html" class="nav-brand" aria-label="Клініка Буцького — на головну">
-    <svg class="nav-logo-desktop" viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto;display:block" aria-hidden="true">
+    <svg class="nav-logo-desktop" viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto" aria-hidden="true">
       <rect x="0" y="1" width="28" height="28" rx="7" fill="#5E8A6E"/>
       <text x="14" y="22" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="20" font-weight="700" fill="#F9F7F3">Б</text>
       <text x="36" y="18" font-family="'Cormorant Garamond',Georgia,serif" font-size="18" font-weight="700" fill="#1C1814" letter-spacing="-0.5">уцький</text>
