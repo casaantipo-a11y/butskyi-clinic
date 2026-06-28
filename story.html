@@ -6,7 +6,10 @@
   <title>Клініка Буцького — Лікування спини та суглобів у Полтаві</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="dns-prefetch" href="https://klinika.org.ua">
+  <link rel="preload" href="ruedi-von-erlach-ScfxEze8EZA-unsplash.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -95,7 +98,7 @@
     .hero-bg { position: absolute; inset: 0; z-index: 0; }
     .hero-bg img {
       width: 100%; height: 100%; object-fit: cover; object-position: 65% 50%; display: block;
-      transform: scale(1.575) translate(8rem, -8rem);
+      transform: scale(1.575) translate(8rem, -8rem); will-change: transform;
     }
     .hero-bg-overlay {
       position: absolute; inset: 0;
@@ -581,7 +584,7 @@
       <text x="36" y="18" font-family="'Cormorant Garamond',Georgia,serif" font-size="18" font-weight="700" fill="#1C1814" letter-spacing="-0.5">уцький</text>
       <text x="36" y="30" font-family="'Plus Jakarta Sans',system-ui,sans-serif" font-size="6.5" font-weight="600" fill="#A09890" letter-spacing="2">КЛІНІКА · ПОЛТАВА</text>
     </svg>
-    <img class="nav-logo-mobile" src="https://klinika.org.ua/wp-content/uploads/2021/12/logo-klinika.png" alt="Клініка Буцького" loading="lazy">
+    <img class="nav-logo-mobile" src="https://klinika.org.ua/wp-content/uploads/2021/12/logo-klinika.png" alt="Клініка Буцького" loading="lazy" decoding="async">
   </a>
   <span class="nav-mobile-title" aria-hidden="true">Butskyi Clinic</span>
   <ul class="nav-links">
@@ -611,7 +614,7 @@
 <!-- ════════════════════════ HERO ════════════════════════ -->
 <section id="hero">
   <div class="hero-bg">
-    <img src="ruedi-von-erlach-ScfxEze8EZA-unsplash.jpg" alt="" aria-hidden="true">
+    <img src="ruedi-von-erlach-ScfxEze8EZA-unsplash.jpg" alt="" aria-hidden="true" fetchpriority="high" decoding="sync">
     <div class="hero-bg-overlay"></div>
   </div>
   <div class="hero-exit-veil" aria-hidden="true"></div>
@@ -645,7 +648,7 @@
 <!-- ════════════════════════ MANIFESTO ════════════════════════ -->
 <section id="manifesto">
   <div class="manifesto-bg" aria-hidden="true">
-    <img src="3d-render-tree-against-sunset-sky (1).jpg" alt="">
+    <img src="3d-render-tree-against-sunset-sky (1).jpg" alt="" loading="lazy" decoding="async">
   </div>
   <div class="manifesto-pin">
     <div class="manifesto-text" id="manifesto-text">
@@ -658,7 +661,7 @@
 <section id="prologue">
   <div class="prologue-inner">
     <div class="prologue-img">
-      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_395.jpg" alt="Консультація в клініці Буцького">
+      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_395.jpg" alt="Консультація в клініці Буцького" loading="lazy" decoding="async">
       <div class="prologue-img-mask"></div>
     </div>
     <div class="prologue-text">
@@ -714,7 +717,7 @@
       <p class="principle-p">Починаєте у одного лікаря за однією методикою. За необхідності — передача до наступного спеціаліста. Потім курс масажу або реабілітації для закріплення результату. Жодних хаотичних призначень від різних лікарів.</p>
     </div>
     <div class="principle-photo">
-      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_261.jpg" alt="" loading="lazy">
+      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_261.jpg" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -726,7 +729,7 @@
       <p class="principle-p">УХТ, лазер, плазмотерапія, масаж, ампліпульс: ефективні методи без навантаження на організм. 90% пацієнтів відчувають стійкий позитивний ефект вже після курсу ударно-хвильової терапії.</p>
     </div>
     <div class="principle-photo">
-      <img src="1769877457547-e1769886321205.jpg" alt="" loading="lazy">
+      <img src="1769877457547-e1769886321205.jpg" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -738,7 +741,7 @@
       <p class="principle-p">Лікар особисто курує весь процес і вносить корективи на кожному етапі. Ваш випадок не схожий на інші — ваше лікування теж не має бути шаблонним.</p>
     </div>
     <div class="principle-photo">
-      <img src="img-kliniki-16.webp" alt="" loading="lazy">
+      <img src="img-kliniki-16.webp" alt="" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -760,31 +763,31 @@
   <div class="methods-track-wrap">
     <div class="methods-track">
       <div class="mc">
-        <div class="mc-img"><img src="img-kliniki-11.webp" alt="УХТ" loading="lazy"></div>
+        <div class="mc-img"><img src="img-kliniki-11.webp" alt="УХТ" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Основний метод</span><div class="mc-name">Ударно-хвильова терапія</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="1769877457536-e1769886249843.jpg" alt="Лазер" loading="lazy"></div>
+        <div class="mc-img"><img src="1769877457536-e1769886249843.jpg" alt="Лазер" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Фізіотерапія</span><div class="mc-name">Лазеротерапія</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="1769877457547-e1769886321205.jpg" alt="Масаж" loading="lazy"></div>
+        <div class="mc-img"><img src="1769877457547-e1769886321205.jpg" alt="Масаж" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Мануальна терапія</span><div class="mc-name">Лікувальний масаж</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="1769877513627-e1769887068539.jpg" alt="Плазмотерапія" loading="lazy"></div>
+        <div class="mc-img"><img src="1769877513627-e1769887068539.jpg" alt="Плазмотерапія" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Регенерація</span><div class="mc-name">Плазмотерапія (PRP)</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="https://klinika.org.ua/wp-content/uploads/2024/01/ampi.webp" alt="Ампліпульс" loading="lazy"></div>
+        <div class="mc-img"><img src="https://klinika.org.ua/wp-content/uploads/2024/01/ampi.webp" alt="Ампліпульс" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Електростимуляція</span><div class="mc-name">Ампліпульстерапія</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="1769877400255-e1769885373705.jpg" alt="Реабілітація" loading="lazy"></div>
+        <div class="mc-img"><img src="1769877400255-e1769885373705.jpg" alt="Реабілітація" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Відновлення</span><div class="mc-name">Реабілітація</div></div>
       </div>
       <div class="mc">
-        <div class="mc-img"><img src="1769877457587-e1769886617646.jpg" alt="Блокади" loading="lazy"></div>
+        <div class="mc-img"><img src="1769877457587-e1769886617646.jpg" alt="Блокади" loading="lazy" decoding="async"></div>
         <div class="mc-body"><span class="mc-tag">Знеболення</span><div class="mc-name">Лікувальні блокади</div></div>
       </div>
       <div class="mc-text">
@@ -807,7 +810,7 @@
         <div class="tl-date">Початок</div>
         <div class="tl-title">Перший пацієнт</div>
         <p class="tl-body">Усе почалось з однієї людини з болем у спині та бажання допомогти без операції. Тоді здавалось, що це надто просто. Виявилось: ні.</p>
-        <div class="tl-img"><img src="1769877400161-e1769885699486.jpg" alt="Лікар Буцького" loading="lazy"></div>
+        <div class="tl-img"><img src="1769877400161-e1769885699486.jpg" alt="Лікар Буцького" loading="lazy" decoding="async"></div>
       </div>
       <div class="tl-item">
         <div class="tl-date">Перелом</div>
@@ -818,7 +821,7 @@
         <div class="tl-date">Сьогодні</div>
         <div class="tl-title">7+ років роботи</div>
         <p class="tl-body">Сотні пацієнтів, десятки діагнозів, один незмінний принцип: лікувати причину, а не симптом. Результативність 98% говорить сама за себе.</p>
-        <div class="tl-img"><img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_299.jpg" alt="Команда клініки" loading="lazy"></div>
+        <div class="tl-img"><img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_299.jpg" alt="Команда клініки" loading="lazy" decoding="async"></div>
       </div>
       <div class="tl-item">
         <div class="tl-date">Далі</div>
@@ -837,19 +840,19 @@
   </div>
   <div class="rv-wrap">
     <div class="rv-track">
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy" decoding="async"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy" decoding="async"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy" decoding="async"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy" decoding="async"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy" decoding="async"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy" decoding="async"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
       <!-- duplicate for seamless loop -->
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
-      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy" decoding="async"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy" decoding="async"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy" decoding="async"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy" decoding="async"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy" decoding="async"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy" decoding="async"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
     </div>
   </div>
 </section>
