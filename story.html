@@ -1148,16 +1148,17 @@
 
   /* ── Journey items reveal ── */
   if (window.matchMedia('(max-width: 900px)').matches) {
-    document.querySelectorAll('.tl-item').forEach(function(item) {
-      var arrow = item.nextElementSibling;
-      var tl = gsap.timeline({
-        scrollTrigger: { trigger: item, start: 'top 72%', toggleActions: 'play none none none' }
-      });
-      tl.from(item, { opacity: 0, y: 24, duration: 1.1, ease: 'power2.out' });
-      if (arrow && arrow.classList.contains('tl-arrow')) {
-        tl.fromTo(arrow,
+    var tlJourney = gsap.timeline({
+      scrollTrigger: { trigger: '.tl-grid', start: 'top 75%', toggleActions: 'play none none none' }
+    });
+    var tlItems  = document.querySelectorAll('.tl-item');
+    var tlArrows = document.querySelectorAll('.tl-arrow');
+    tlItems.forEach(function(item, i) {
+      tlJourney.from(item, { opacity: 0, y: 24, duration: 1.0, ease: 'power2.out' });
+      if (tlArrows[i]) {
+        tlJourney.fromTo(tlArrows[i],
           { opacity: 0.55, clipPath: 'inset(0 0 100% 0)' },
-          { clipPath: 'inset(0 0 0% 0)', duration: 0.6, ease: 'power2.inOut' },
+          { clipPath: 'inset(0 0 0% 0)', duration: 0.55, ease: 'power2.inOut' },
           '+=0.05'
         );
       }
