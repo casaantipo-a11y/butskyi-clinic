@@ -47,6 +47,7 @@
     nav {
       position: fixed; top: 0.75rem; left: 50%; transform: translateX(-50%);
       z-index: 7000;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
@@ -495,8 +496,12 @@
         min-width: unset;
         width: calc(100% - 2rem);
         grid-template-columns: auto 1fr auto;
-        position: relative;
+        position: fixed;
         padding-top: env(safe-area-inset-top, 0.4rem);
+      }
+      nav.nav--hidden {
+        transform: translateX(-50%) translateY(calc(-100% - 1.5rem));
+        opacity: 0;
       }
       .nav-links { display: none; }
       .nav-cta { display: none; }
@@ -936,6 +941,23 @@
     const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
     document.getElementById('progress').style.width = (p * 100) + '%';
   }, { passive: true });
+
+  /* ── Mobile nav: hide on scroll down, show on scroll up ── */
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    const mobileNav = document.querySelector('nav');
+    let lastScrollY = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < 60) {
+        mobileNav.classList.remove('nav--hidden');
+      } else if (y > lastScrollY) {
+        mobileNav.classList.add('nav--hidden');
+      } else {
+        mobileNav.classList.remove('nav--hidden');
+      }
+      lastScrollY = y;
+    }, { passive: true });
+  }
 
   /* ── Hero: line-by-line reveal on load ── */
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
