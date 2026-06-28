@@ -516,7 +516,7 @@
       .tl-grid { grid-template-columns: 1fr; gap: 2rem; }
       .tl-grid::before { display: none; }
       .tl-item:nth-child(even) { margin-top: 0; }
-      .tl-arrow { display: flex; justify-content: center; color: var(--accent); opacity: 0.55; margin: -0.5rem 0; }
+      .tl-arrow { display: flex; justify-content: center; color: var(--accent); opacity: 0; margin: -0.5rem 0; }
 
       /* Methods: switch to native touch scroll, hide arrow buttons */
       .methods-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -1146,14 +1146,27 @@
     updateBtns();
   })();
 
-  /* ── Journey items alternate reveal ── */
-  document.querySelectorAll('.tl-item').forEach(function(item, i) {
-    gsap.from(item, {
-      opacity: 0, x: i % 2 === 0 ? -30 : 30,
-      duration: 1.4, ease: 'power2.out',
-      scrollTrigger: { trigger: item, start: 'top 65%' }
+  /* ── Journey items reveal ── */
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    document.querySelectorAll('.tl-item').forEach(function(item) {
+      var arrow = item.nextElementSibling;
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: item, start: 'top 72%', toggleActions: 'play none none none' }
+      });
+      tl.from(item, { opacity: 0, y: 24, duration: 1.1, ease: 'power2.out' });
+      if (arrow && arrow.classList.contains('tl-arrow')) {
+        tl.to(arrow, { opacity: 0.55, y: 0, duration: 0.5, ease: 'power2.out' }, '+=0.05');
+      }
     });
-  });
+  } else {
+    document.querySelectorAll('.tl-item').forEach(function(item, i) {
+      gsap.from(item, {
+        opacity: 0, x: i % 2 === 0 ? -30 : 30,
+        duration: 1.4, ease: 'power2.out',
+        scrollTrigger: { trigger: item, start: 'top 65%' }
+      });
+    });
+  }
 
   /* ── Journey images parallax ── */
   document.querySelectorAll('.tl-img img').forEach(function(img) {
