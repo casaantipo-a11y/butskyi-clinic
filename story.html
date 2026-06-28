@@ -1050,24 +1050,25 @@
     });
   })();
 
-  /* ── Principle sections reveal ── */
+  /* ── Principle sections reveal: top → bottom sequential ── */
   document.querySelectorAll('.principle-section').forEach(function(section) {
-    var isReverse = section.classList.contains('reverse');
-    gsap.fromTo(section.querySelector('.principle-text'),
-      { opacity: 0, x: isReverse ? 40 : -40 },
-      { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: section, start: 'top 38%' } }
-    );
-    gsap.fromTo(section.querySelector('.principle-photo'),
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out',
-        scrollTrigger: { trigger: section, start: 'top 78%' } }
-    );
-    gsap.fromTo(section.querySelector('.principle-photo img'),
-      { scale: 1.07 },
-      { scale: 1, duration: 1.6, ease: 'power3.out',
-        scrollTrigger: { trigger: section, start: 'top 80%' } }
-    );
+    var tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none none' }
+    });
+    tl.fromTo(section.querySelector('.principle-text'),
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
+      )
+      .fromTo(section.querySelector('.principle-photo'),
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
+        '+=0.1'
+      )
+      .fromTo(section.querySelector('.principle-photo img'),
+        { scale: 1.07 },
+        { scale: 1, duration: 1.5, ease: 'power3.out' },
+        '<'
+      );
   });
 
   /* ── Methods track entrance ── */
