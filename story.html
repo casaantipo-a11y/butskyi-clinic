@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Клініка Буцького — Лікування спини та суглобів у Полтаві</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F9F7F3;
+      --dark:    #0B0A08;
+      --dark2:   #141210;
+      --ink:     #1C1814;
+      --ink2:    #6B635A;
+      --ink3:    #A09890;
+      --accent:  #5E8A6E;
+      --ag:      rgba(94,138,110,0.12);
+      --border:  rgba(26,22,18,0.09);
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Plus Jakarta Sans', system-ui, sans-serif;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html { font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--bg); }
+    body { overflow-x: hidden; }
+
+    /* film grain */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9000;
+      pointer-events: none; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── progress ── */
+    #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 8000; width: 0; transition: width 0.1s linear; }
+
+    /* ── nav ── */
+    nav {
+      position: fixed; top: 0.75rem; left: 50%; transform: translateX(-50%);
+      z-index: 7000;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0.4rem 0.4rem 0.4rem 1.5rem;
+      background: rgba(249,247,243,0.88);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      border: 1px solid rgba(26,22,18,0.1);
+      border-radius: 9999px;
+      white-space: nowrap;
+      min-width: 680px;
+    }
+    .nav-brand {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .nav-brand-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .nav-brand-sub {
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink3);
+      line-height: 1;
+    }
+    .nav-links { display: flex; list-style: none; gap: clamp(1.5rem, 3vw, 3rem); justify-content: center; }
+    .nav-links a { font-size: 0.75rem; font-weight: 500; color: rgba(26,22,18,0.4); text-decoration: none; letter-spacing: 0.01em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta-wrap { display: flex; justify-content: flex-end; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.55rem 1.25rem; background: var(--accent); color: #fff; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-decoration: none; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ════════════════════════ HERO ════════════════════════ */
+    #hero {
+      position: relative; min-height: 100dvh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(2rem,4vw,3.5rem) clamp(1.5rem,6vw,5rem);
+      overflow: hidden; background: var(--bg);
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: 65% 50%; display: block;
+      transform: scale(1.575) translate(8rem, -8rem);
+    }
+    .hero-bg-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(249,247,243,0.72) 0%, rgba(249,247,243,0.2) 28%, rgba(249,247,243,0.0) 55%);
+    }
+    .hero-content { position: relative; z-index: 2; bottom: 1cm; }
+    .hero-exit-veil {
+      position: absolute; inset: 0; z-index: 1;
+      background: #0A0604; opacity: 0; pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.875rem; margin-top: 2.125rem; margin-left: -3rem; opacity: 0;
+    }
+    .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); flex-shrink: 0; }
+
+    h1.hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7.5vw, 7.5rem);
+      font-weight: 300; line-height: 1.0; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem; margin-left: -3rem; margin-top: -0.875rem;
+    }
+    h1.hero-h1 em { font-style: italic; color: var(--accent); }
+
+    .hw { display: inline-block; opacity: 0; }
+
+    .hero-stats { display: flex; gap: clamp(2rem,4vw,3.5rem); opacity: 0; margin-top: 2rem; }
+    .hs { display: flex; flex-direction: column; gap: 0.2rem; }
+    .hs-num {
+      font-family: var(--sans); font-size: clamp(1.125rem,1.5vw,1.375rem);
+      font-weight: 700; line-height: 1; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .hs-num em { color: var(--accent); font-style: normal; }
+    .hs-lbl { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3); }
+
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; opacity: 0; margin-top: 3rem; }
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1rem 1rem 1rem 2rem; background: var(--ink); color: #fff;
+      border-radius: 9999px; font-size: 0.9375rem; font-weight: 600; text-decoration: none;
+      transition: transform 0.25s var(--ease-out);
+    }
+    .hero-btn:hover { transform: scale(0.97); }
+    .hero-btn-icon { width: 2.25rem; height: 2.25rem; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; }
+    .hero-sub-text { font-size: 0.75rem; color: var(--ink3); text-align: right; max-width: 200px; line-height: 1.5; }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.5rem; right: clamp(1.5rem,6vw,5rem); z-index: 2;
+      writing-mode: vertical-rl; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(26,22,18,0.28); display: flex; align-items: center; gap: 1rem; opacity: 0;
+    }
+    .hero-scroll-hint::after { content: ''; width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(26,22,18,0.2), transparent); }
+
+    /* ════════════════════════ MANIFESTO ════════════════════════ */
+    #manifesto { background: #0A0604; position: relative; }
+    .manifesto-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    .manifesto-bg img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+      display: block; will-change: transform;
+    }
+    #manifesto::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: rgba(10,6,4,0.52);
+    }
+    .manifesto-pin {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: clamp(2rem,4vw,4rem) clamp(2rem,8vw,8rem);
+      position: relative; z-index: 2;
+    }
+    .manifesto-text {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+      font-weight: 300; line-height: 1.35; letter-spacing: -0.01em;
+      max-width: 880px; text-align: center;
+    }
+    .m-word { display: inline; color: rgba(255,248,240,0.92); }
+    .m-word.accent-word { color: #F4C47A; font-style: italic; }
+
+    /* ════════════════════════ PROLOGUE ════════════════════════ */
+    #prologue { background: var(--bg); padding: clamp(2.5rem,5vw,5rem) clamp(1.5rem,6vw,5rem); }
+    .prologue-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem,6vw,6rem); align-items: center; }
+
+    .prologue-img { position: relative; border-radius: 20px; overflow: hidden; }
+    .prologue-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .prologue-img-mask { position: absolute; inset: 0; background: var(--bg); transform-origin: bottom; }
+
+    .chapter-label { display: flex; align-items: center; gap: 0.875rem; margin-bottom: 1.25rem; }
+    .ch-num { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); }
+    .ch-line { width: 40px; height: 1px; background: var(--border); }
+
+    .prologue-h2 {
+      font-family: var(--serif); font-size: clamp(2.25rem,3.5vw,3.5rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 1.5rem;
+    }
+    .prologue-h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .prologue-p { font-size: clamp(0.9rem,1.1vw,1rem); line-height: 1.8; color: var(--ink2); margin-bottom: 1rem; }
+
+    .pr-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-top: 2rem; }
+    .pr-stat { background: var(--bg); padding: 1.375rem 1.125rem; display: flex; flex-direction: column; gap: 0.2rem; }
+    .pr-stat-num { font-family: var(--serif); font-size: clamp(1.75rem,2.5vw,2.5rem); font-weight: 700; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
+    .pr-stat-num em { color: var(--accent); font-style: normal; }
+    .pr-stat-lbl { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); }
+
+    /* ════════════════════════ PULL QUOTE ════════════════════════ */
+    #pull-quote {
+      background: #ECEAE4;
+      padding: clamp(3rem,6vw,6rem) clamp(2rem,8vw,8rem);
+      position: relative; overflow: hidden;
+    }
+
+    .pq-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .pq-text {
+      font-family: var(--serif); font-size: clamp(2rem,4.5vw,4.5rem);
+      font-weight: 300; line-height: 1.2; letter-spacing: -0.01em;
+      color: var(--ink); margin-bottom: 2rem;
+    }
+    .pq-text em { font-style: italic; color: var(--accent); }
+    .pq-attr { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); }
+    .pq-attr strong { color: var(--ink2); font-weight: 600; }
+
+    /* ════════════════════════ PRINCIPLES ════════════════════════ */
+    #principles { background: var(--bg); }
+    .principles-intro { padding: clamp(2.5rem,5vw,4.5rem) clamp(1.5rem,6vw,5rem); max-width: 1200px; margin: 0 auto; }
+    .principles-intro-title {
+      font-family: var(--serif); font-size: clamp(2.25rem,4vw,3.75rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; color: var(--ink);
+    }
+    .principles-intro-title em { font-style: italic; font-weight: 300; color: var(--accent); }
+
+    .principle-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 65vh; border-top: 1px solid var(--border); }
+    .principle-section.reverse .principle-text { order: 2; }
+    .principle-section.reverse .principle-photo { order: 1; }
+    .principle-text {
+      padding: clamp(1.5rem,3vw,3rem) clamp(2.5rem,5vw,5rem);
+      display: flex; flex-direction: column; justify-content: center; opacity: 0;
+    }
+    .principle-num {
+      font-family: var(--serif); font-size: clamp(4rem,10vw,9rem);
+      font-weight: 700; color: var(--accent); opacity: 0.18;
+      line-height: 0.85; letter-spacing: -0.04em; margin-bottom: 0.75rem;
+    }
+    .pc-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.5rem; }
+    .principle-h3 {
+      font-family: var(--serif); font-size: clamp(1.875rem,3vw,3rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 1.25rem; margin-top: 0.375rem;
+    }
+    .principle-h3 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .principle-p { font-size: 0.9375rem; line-height: 1.85; color: var(--ink2); max-width: 460px; }
+    .principle-photo { overflow: hidden; position: relative; background: #E8E5DF; }
+    .principle-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .principle-section:last-child .principle-photo::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 45%; background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none;
+    }
+
+    /* ════════════════════════ METHODS ════════════════════════ */
+    #methods { background: var(--bg); overflow: hidden; }
+    .methods-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      padding: clamp(5rem,9vw,9rem) clamp(2rem,6vw,5rem) clamp(2rem,3.5vw,3rem);
+    }
+    .methods-h2 {
+      font-family: var(--serif); font-size: clamp(2rem,4vw,3.75rem);
+      font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+    }
+    .methods-h2 em { font-style: italic; color: var(--accent); }
+    .methods-arrows { display: flex; gap: 0.5rem; align-items: center; padding-bottom: 0.5rem; }
+    .methods-btn {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%;
+      border: 1px solid var(--border); background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--ink); flex-shrink: 0;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .methods-btn:hover:not(:disabled) { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .methods-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    .methods-track-wrap { overflow: hidden; padding: 0 clamp(2rem,6vw,5rem) clamp(1.5rem,2.5vw,2.25rem); }
+    .methods-track { display: flex; gap: 1.25rem; width: max-content; }
+    .mc {
+      width: clamp(260px,26vw,320px); flex-shrink: 0;
+      background: #fff; border: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(26,22,18,0.07);
+      border-radius: 16px; overflow: hidden;
+    }
+    .mc-img { overflow: hidden; }
+    .mc-img img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
+    .mc:first-child .mc-img img { object-position: 35% center; }
+    .mc:nth-child(2) .mc-img img { object-position: center 7%; }
+    .mc:nth-child(6) .mc-img img { object-position: 30% center; }
+    .mc:hover .mc-img img { transform: scale(1.04); }
+    .mc-body { padding: 1.25rem 1.5rem 1.75rem; }
+    .mc-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+    .mc-name { font-family: var(--serif); font-size: 1.375rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+    .mc-text {
+      width: clamp(280px,26vw,340px); flex-shrink: 0;
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 2.5rem 2rem; display: flex; flex-direction: column; justify-content: flex-end;
+      background: linear-gradient(135deg, rgba(94,138,110,0.08), rgba(94,138,110,0.02));
+    }
+    .mc-text-quote { font-family: var(--serif); font-size: clamp(1.25rem,2vw,1.75rem); font-weight: 300; line-height: 1.5; color: var(--ink2); }
+    .mc-text-quote em { color: var(--accent); font-style: italic; }
+
+    /* ════════════════════════ JOURNEY ════════════════════════ */
+    #journey { background: var(--bg); padding: clamp(6rem,10vw,11rem) clamp(1.5rem,6vw,5rem) clamp(4rem,7vw,8rem); }
+    .journey-inner { max-width: 1200px; margin: 0 auto; }
+    .journey-inner > h2 {
+      font-family: var(--serif); font-size: clamp(3.25rem,6.5vw,7rem);
+      font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: clamp(4rem,6vw,6.5rem);
+      text-align: center; max-width: none;
+    }
+    .journey-inner > h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem 5rem; position: relative; }
+    .tl-grid::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--border); }
+    .tl-item { display: flex; flex-direction: column; gap: 1rem; padding: 0.5rem 0; }
+    .tl-item:nth-child(even) { margin-top: 3rem; }
+    .tl-date { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    .tl-title { font-family: var(--serif); font-size: clamp(1.9rem,3.2vw,3rem); font-weight: 700; line-height: 1.15; color: var(--ink); }
+    .tl-body { font-size: 1.1rem; line-height: 1.85; color: var(--ink2); max-width: 440px; }
+    .tl-img { border-radius: 16px; overflow: hidden; margin-top: 1rem; }
+    .tl-img img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; border-radius: 16px; }
+
+    /* ════════════════════════ REVIEWS ════════════════════════ */
+    #reviews { background: var(--bg); padding: clamp(2rem,4vw,4rem) 0; overflow: hidden; }
+    .reviews-hdr { padding: 0 clamp(1.5rem,6vw,5rem); margin-bottom: clamp(2rem,4vw,3rem); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.22rem 0.875rem 0.22rem 0.5rem;
+      border: 1px solid rgba(94,138,110,0.35); border-radius: 9999px;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .reviews-title { font-family: var(--serif); font-size: clamp(2rem,4vw,3.5rem); font-weight: 300; line-height: 1.2; color: var(--ink); }
+    .reviews-title em { font-style: italic; color: var(--accent); }
+
+    .rv-wrap {
+      overflow: hidden;
+      -webkit-mask: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+    .rv-track { display: flex; gap: 1.25rem; width: max-content; animation: rvscroll 44s linear infinite; }
+    .rv-track:hover { animation-play-state: paused; }
+    @keyframes rvscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .rv-card { width: 360px; flex-shrink: 0; background: #fff; border: 1px solid var(--border); box-shadow: 0 2px 20px rgba(26,22,18,0.06); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .rv-stars { color: var(--accent); letter-spacing: 0.12em; font-size: 0.875rem; }
+    .rv-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 300; line-height: 1.7; color: var(--ink2); flex-grow: 1; }
+    .rv-footer { display: flex; align-items: center; gap: 0.875rem; padding-top: 1rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .rv-avatar { width: 2.25rem; height: 2.25rem; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .rv-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rv-name { font-size: 0.8125rem; font-weight: 600; color: var(--ink); }
+    .rv-meta { font-size: 0.6875rem; color: var(--ink3); }
+
+    /* ════════════════════════ CTA ════════════════════════ */
+    #cta { background: var(--bg); padding: clamp(3rem,6vw,6rem) clamp(2rem,8vw,8rem); text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(94,138,110,0.1) 0%, transparent 65%); pointer-events: none; }
+    .cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .cta-inner h2 { font-family: var(--serif); font-size: clamp(2.5rem,5.5vw,5.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.5rem; }
+    .cta-inner h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
+    .cta-inner p { font-size: clamp(1rem,1.4vw,1.125rem); color: var(--ink2); line-height: 1.7; max-width: 480px; margin: 0 auto 3rem; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1.1rem 1.1rem 1.1rem 2rem; background: var(--accent); color: #fff; border-radius: 9999px; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: transform 0.25s var(--ease-out), box-shadow 0.25s; }
+    .btn-primary:hover { transform: scale(0.97); box-shadow: 0 16px 48px rgba(94,138,110,0.3); }
+    .btn-primary .icon { width: 2.25rem; height: 2.25rem; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .btn-ghost { display: inline-flex; align-items: center; padding: 1.1rem 2rem; background: transparent; color: var(--ink); border: 1px solid var(--border); border-radius: 9999px; font-size: 0.9375rem; font-weight: 500; text-decoration: none; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--ink2); }
+
+    .cta-contacts { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .cta-contact label { display: block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.35rem; }
+    .cta-contact a { font-size: 1.0625rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+    .cta-contact a:hover { color: var(--accent); }
+
+    /* ════════════════════════ FOOTER ════════════════════════ */
+    footer { background: #F0EDE7; padding: 2.5rem clamp(2rem,6vw,5rem); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid var(--border); }
+    .ft-brand { font-size: 0.8125rem; font-weight: 600; color: var(--ink2); }
+    .ft-brand span { color: var(--ink3); }
+    .ft-right { font-size: 0.7rem; color: var(--ink3); }
+
+    /* ════════════════════════ RESPONSIVE ════════════════════════ */
+    @media (max-width: 900px) {
+      .prologue-inner { grid-template-columns: 1fr; }
+      .principle-section { grid-template-columns: 1fr; min-height: auto; }
+      .principle-section.reverse .principle-text { order: 0; }
+      .principle-section.reverse .principle-photo { order: 0; }
+      .principle-photo { min-height: 60vw; }
+      .tl-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .tl-grid::before { display: none; }
+      .tl-item:nth-child(even) { margin-top: 0; }
+      .methods-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      h1.hero-h1 { font-size: clamp(2.5rem,12vw,4rem); }
+      .hero-meta { flex-direction: column; align-items: flex-start; }
+      .hero-cta-wrap { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-name">Буцький</span>
+    <span class="nav-brand-sub">Клініка · Полтава</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#prologue">Про нас</a></li>
+    <li><a href="#principles">Підхід</a></li>
+    <li><a href="#methods">Методи</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+  </ul>
+  <div class="nav-cta-wrap">
+    <a href="#cta" class="nav-cta">Записатись</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════ HERO ════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="ruedi-von-erlach-ScfxEze8EZA-unsplash.jpg" alt="" aria-hidden="true">
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hero-exit-veil" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Клініка Буцького · Полтава · 7+ років</div>
+
+    <h1 class="hero-h1">
+      <span class="hw">Лікування</span> <span class="hw">спини</span><br>
+      <span class="hw">без</span> <span class="hw">таблеток,</span><br>
+      <em><span class="hw">уколів</span> <span class="hw">та</span> <span class="hw">операцій.</span></em>
+    </h1>
+
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-num"><span class="count-up" data-val="98">0</span><em>%</em></div>
+        <div class="hs-lbl">Результативність</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num"><span class="count-up" data-val="7">0</span><em>+</em></div>
+        <div class="hs-lbl">Років досвіду</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num"><span class="count-up" data-val="11">0</span><em>+</em></div>
+        <div class="hs-lbl">Методів лікування</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ MANIFESTO ════════════════════════ -->
+<section id="manifesto">
+  <div class="manifesto-bg" aria-hidden="true">
+    <img src="3d-render-tree-against-sunset-sky (1).jpg" alt="">
+  </div>
+  <div class="manifesto-pin">
+    <div class="manifesto-text" id="manifesto-text">
+      Таблетки та операції потрібні набагато рідше, ніж вам кажуть. У більшості випадків біль — це сигнал тіла, який має конкретну причину. <em>Ми її знаходимо та усуваємо назавжди.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ PROLOGUE ════════════════════════ -->
+<section id="prologue">
+  <div class="prologue-inner">
+    <div class="prologue-img">
+      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_395.jpg" alt="Консультація в клініці Буцького">
+      <div class="prologue-img-mask"></div>
+    </div>
+    <div class="prologue-text">
+      <div class="chapter-label">
+        <span class="ch-num">Розділ 01</span>
+        <div class="ch-line"></div>
+      </div>
+      <h2 class="prologue-h2">Звідки розпочалась<br><em>ця клініка.</em></h2>
+      <p class="prologue-p">Клініка Буцького займається лікуванням патологій опорно-рухового апарату у дітей та дорослих. Сколіоз, грижі міжхребцевих дисків, остеоартроз, п'яткові шпори — все це ми лікуємо без операцій та таблеток.</p>
+      <p class="prologue-p">Наша методика — монотерапія. Один лікар. Один план. Послідовні кроки. Такий підхід забезпечує результативність <strong>98%</strong>, а найчастіше і всі 100%.</p>
+      <div class="pr-stats">
+        <div class="pr-stat">
+          <div class="pr-stat-num"><span class="count-up" data-val="98">0</span><em>%</em></div>
+          <div class="pr-stat-lbl">Результативність</div>
+        </div>
+        <div class="pr-stat">
+          <div class="pr-stat-num"><span class="count-up" data-val="7">0</span><em>+</em></div>
+          <div class="pr-stat-lbl">Років досвіду</div>
+        </div>
+        <div class="pr-stat">
+          <div class="pr-stat-num"><span class="count-up" data-val="11">0</span><em>+</em></div>
+          <div class="pr-stat-lbl">Методів без операцій</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ PULL QUOTE ════════════════════════ -->
+<section id="pull-quote">
+  <div class="pq-inner">
+    <div class="pq-text">«Ми лікуємо причину,<br><em>не симптоми.»</em></div>
+    <div class="pq-attr">— <strong>Лікар Буцький</strong>, засновник клініки</div>
+  </div>
+</section>
+
+<!-- ════════════════════════ PRINCIPLES ════════════════════════ -->
+<section id="principles">
+
+  <div class="principles-intro">
+    <div class="chapter-label">
+      <span class="ch-num">Розділ 02</span>
+      <div class="ch-line"></div>
+    </div>
+    <h2 class="principles-intro-title">Три принципи,<br>яким ми <em>ніколи не зраджуємо.</em></h2>
+  </div>
+
+  <div class="principle-section">
+    <div class="principle-text">
+      <div class="principle-num">01</div>
+      <span class="pc-tag">Принцип I</span>
+      <h3 class="principle-h3">Монотерапія:<br><em>один лікар, один план.</em></h3>
+      <p class="principle-p">Починаєте у одного лікаря за однією методикою. За необхідності — передача до наступного спеціаліста. Потім курс масажу або реабілітації для закріплення результату. Жодних хаотичних призначень від різних лікарів.</p>
+    </div>
+    <div class="principle-photo">
+      <img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_261.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <div class="principle-section reverse">
+    <div class="principle-text">
+      <div class="principle-num">02</div>
+      <span class="pc-tag">Принцип II</span>
+      <h3 class="principle-h3">Лікуємо<br><em>без таблеток та операцій.</em></h3>
+      <p class="principle-p">УХТ, лазер, плазмотерапія, масаж, ампліпульс: ефективні методи без навантаження на організм. 90% пацієнтів відчувають стійкий позитивний ефект вже після курсу ударно-хвильової терапії.</p>
+    </div>
+    <div class="principle-photo">
+      <img src="1769877457547-e1769886321205.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+
+  <div class="principle-section">
+    <div class="principle-text">
+      <div class="principle-num">03</div>
+      <span class="pc-tag">Принцип III</span>
+      <h3 class="principle-h3">Підхід до кожного<br><em>пацієнта індивідуальний.</em></h3>
+      <p class="principle-p">Лікар особисто курує весь процес і вносить корективи на кожному етапі. Ваш випадок не схожий на інші — ваше лікування теж не має бути шаблонним.</p>
+    </div>
+    <div class="principle-photo">
+      <img src="img-kliniki-16.webp" alt="" loading="lazy">
+    </div>
+  </div>
+
+</section>
+
+<!-- ════════════════════════ METHODS (horizontal) ════════════════════════ -->
+<section id="methods">
+  <div class="methods-header">
+    <h2 class="methods-h2">11 методів лікування<br><em>без операцій та таблеток.</em></h2>
+    <div class="methods-arrows">
+      <button class="methods-btn" id="methods-prev" disabled aria-label="Назад">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="methods-btn" id="methods-next" aria-label="Вперед">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="methods-track-wrap">
+    <div class="methods-track">
+      <div class="mc">
+        <div class="mc-img"><img src="img-kliniki-11.webp" alt="УХТ" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Основний метод</span><div class="mc-name">Ударно-хвильова терапія</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="1769877457536-e1769886249843.jpg" alt="Лазер" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Фізіотерапія</span><div class="mc-name">Лазеротерапія</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="1769877457547-e1769886321205.jpg" alt="Масаж" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Мануальна терапія</span><div class="mc-name">Лікувальний масаж</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="1769877513627-e1769887068539.jpg" alt="Плазмотерапія" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Регенерація</span><div class="mc-name">Плазмотерапія (PRP)</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="https://klinika.org.ua/wp-content/uploads/2024/01/ampi.webp" alt="Ампліпульс" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Електростимуляція</span><div class="mc-name">Ампліпульстерапія</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="1769877400255-e1769885373705.jpg" alt="Реабілітація" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Відновлення</span><div class="mc-name">Реабілітація</div></div>
+      </div>
+      <div class="mc">
+        <div class="mc-img"><img src="1769877457587-e1769886617646.jpg" alt="Блокади" loading="lazy"></div>
+        <div class="mc-body"><span class="mc-tag">Знеболення</span><div class="mc-name">Лікувальні блокади</div></div>
+      </div>
+      <div class="mc-text">
+        <div class="mc-text-quote">Також: УЗД діагностика, кінезіотейпування, магнітотерапія, електрофорез, <em>акупунктура</em> та рефлексотерапія.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ JOURNEY ════════════════════════ -->
+<section id="journey">
+  <div class="journey-inner">
+    <div class="chapter-label">
+      <span class="ch-num">Розділ 03 — Наш шлях</span>
+      <div class="ch-line"></div>
+    </div>
+    <h2>Як ми дійшли<br>до <em>цього.</em></h2>
+    <div class="tl-grid">
+      <div class="tl-item">
+        <div class="tl-date">Початок</div>
+        <div class="tl-title">Перший пацієнт</div>
+        <p class="tl-body">Усе почалось з однієї людини з болем у спині та бажання допомогти без операції. Тоді здавалось, що це надто просто. Виявилось: ні.</p>
+        <div class="tl-img"><img src="1769877400161-e1769885699486.jpg" alt="Лікар Буцького" loading="lazy"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Перелом</div>
+        <div class="tl-title">Перший результат</div>
+        <p class="tl-body">Пацієнт одужав без таблеток. Саме тоді ми зрозуміли: це не виняток — це система. Почали розробляти методику монотерапії.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Сьогодні</div>
+        <div class="tl-title">7+ років роботи</div>
+        <p class="tl-body">Сотні пацієнтів, десятки діагнозів, один незмінний принцип: лікувати причину, а не симптом. Результативність 98% говорить сама за себе.</p>
+        <div class="tl-img"><img src="https://klinika.org.ua/wp-content/uploads/2022/07/КлінікаБуцький_299.jpg" alt="Команда клініки" loading="lazy"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Далі</div>
+        <div class="tl-title">Розвиток команди</div>
+        <p class="tl-body">Нові методики, розширення команди спеціалістів. Але мета та сама: повернути кожному пацієнту повноцінне рухливе життя без болю.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ REVIEWS ════════════════════════ -->
+<section id="reviews">
+  <div class="reviews-hdr">
+    <div><span class="eyebrow">Відгуки пацієнтів</span></div>
+    <h2 class="reviews-title">Люди, які <em>повернулись до життя</em></h2>
+  </div>
+  <div class="rv-wrap">
+    <div class="rv-track">
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
+      <!-- duplicate for seamless loop -->
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Прийшла з болем у попереку, який мучив мене 3 роки. Після курсу ударно-хвильової терапії біль пройшов повністю. Дякую лікарю Буцькому за індивідуальний підхід.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Олена" loading="lazy"></div><div><div class="rv-name">Олена Василенко</div><div class="rv-meta">Грижа L4–L5 · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Сколіоз у сина виявили у 12 років. За 2 курси лікування хребет вирівнявся на 80%. Жодних операцій, жодних таблеток. Тільки фізичні методи.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Наталія" loading="lazy"></div><div><div class="rv-name">Наталія Кравченко</div><div class="rv-meta">Дитячий сколіоз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«П'яткова шпора: думав буду кульгати все життя. Після 5 сеансів УХТ біль зменшився вдвічі, після 10 — забув про неї. Рекомендую всім.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Василь" loading="lazy"></div><div><div class="rv-name">Василь Мороз</div><div class="rv-meta">П'яткова шпора · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Остеоартроз коліна 2 ступеня. Інші лікарі пропонували лише ін'єкції та операцію. Тут: лазер, масаж, реабілітація. Зараз ходжу без болю вже 8 місяців.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Іван" loading="lazy"></div><div><div class="rv-name">Іван Петренко</div><div class="rv-meta">Остеоартроз · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Кривошия у немовляти — страшно навіть вимовити. Лікар пояснив все детально. За місяць голівка вирівнялась. Безмежно вдячна.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="Марія" loading="lazy"></div><div><div class="rv-name">Марія Ткаченко</div><div class="rv-meta">Кривошия · Полтава</div></div></div></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">«Радикуліт не давав спати 2 роки. Після першого ж сеансу відчув полегшення. Повний курс — і я знову можу грати з дітьми без болю.»</p><div class="rv-footer"><div class="rv-avatar"><img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Сергій" loading="lazy"></div><div><div class="rv-name">Сергій Литвин</div><div class="rv-meta">Радикуліт · Полтава</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ CTA ════════════════════════ -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="chapter-label" style="justify-content:center; margin-bottom:1.5rem;">
+      <span class="ch-num">Зв'яжіться з нами</span>
+    </div>
+    <h2>Готові <em>позбутись болю?</em></h2>
+    <p>Запишіться на консультацію прямо зараз. Перший крок до здоров'я — один дзвінок або повідомлення у Viber.</p>
+    <div class="cta-btns">
+      <a href="tel:+380502216415" class="btn-primary">
+        Зателефонувати
+        <span class="icon">↗</span>
+      </a>
+      <a href="index.html" class="btn-ghost">На головну сайту</a>
+    </div>
+    <div class="cta-contacts">
+      <div class="cta-contact">
+        <label>Телефон (Viber)</label>
+        <a href="tel:+380502216415">+38 (050) 221 64 15</a>
+      </div>
+      <div class="cta-contact">
+        <label>Телефон</label>
+        <a href="tel:+380950485099">+38 (095) 048 50 99</a>
+      </div>
+      <div class="cta-contact">
+        <label>Адреса</label>
+        <a href="https://maps.google.com/?q=Клініка+Буцького+Полтава" target="_blank">вул. Миколи Дмітрієва, 6</a>
+      </div>
+      <div class="cta-contact">
+        <label>Графік роботи</label>
+        <a href="#">Пн–Пт 9:00–18:30</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-brand">Клініка Буцького <span>· Полтава, 2026</span></div>
+  <div class="ft-right">Лікування спини та суглобів без таблеток, уколів та операцій</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Reading progress ── */
+  window.addEventListener('scroll', () => {
+    const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    document.getElementById('progress').style.width = (p * 100) + '%';
+  }, { passive: true });
+
+  /* ── Hero: line-by-line reveal on load ── */
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .fromTo('.hero-eyebrow', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.9, delay: 0.2 })
+    .fromTo('.hw', { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.13, duration: 1.5, ease: 'power2.out' }, '-=0.5')
+    .to('.hero-stats', { opacity: 1, y: 0, duration: 0.65 }, '-=1.0')
+    .to('.hero-scroll-hint', { opacity: 1, duration: 0.7 }, '-=0.5');
+
+  /* ── Hero BG parallax ── */
+  gsap.to('.hero-bg img', {
+    yPercent: 18,
+    ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+
+  /* ── Manifesto word reveal (triggered, not scrub) ── */
+  (function () {
+    const el = document.getElementById('manifesto-text');
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(textNode => {
+      const parts = textNode.textContent.split(/(\s+)/);
+      const frag = document.createDocumentFragment();
+      const isAccent = textNode.parentElement && textNode.parentElement.tagName === 'EM';
+      parts.forEach(part => {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else if (part) {
+          const span = document.createElement('span');
+          span.className = 'm-word' + (isAccent ? ' accent-word' : '');
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+
+    gsap.from('.m-word', {
+      opacity: 0,
+      y: 18,
+      stagger: 0.055,
+      duration: 1.1,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: '#manifesto',
+        start: 'top 65%'
+      }
+    });
+  })();
+
+
+  /* ── Prologue image mask reveal ── */
+  gsap.to('.prologue-img-mask', {
+    scaleY: 0,
+    transformOrigin: 'bottom',
+    duration: 1,
+    ease: 'power4.inOut',
+    scrollTrigger: { trigger: '.prologue-img', start: 'top 80%', toggleActions: 'play none none none' }
+  });
+
+  /* ── Prologue text reveal ── */
+  gsap.from('.prologue-text > *', {
+    opacity: 0, y: 32,
+    stagger: 0.12, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.prologue-text', start: 'top 78%' }
+  });
+
+  /* ── Prologue image parallax ── */
+  gsap.to('.prologue-img img', {
+    yPercent: -8, ease: 'none',
+    scrollTrigger: { trigger: '#prologue', start: 'top bottom', end: 'bottom top', scrub: true }
+  });
+
+  /* ── Pull quote reveal ── */
+  gsap.from('.pq-text, .pq-attr', {
+    opacity: 0, y: 40, stagger: 0.18, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '#pull-quote', start: 'top 72%' }
+  });
+
+  /* ── Principles intro: word-by-word title reveal ── */
+  (function () {
+    var title = document.querySelector('.principles-intro-title');
+    if (!title) return;
+    var walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) textNodes.push(node);
+    textNodes.forEach(function (textNode) {
+      var parts = textNode.textContent.split(/(\s+)/);
+      var frag = document.createDocumentFragment();
+      var isAccent = textNode.parentElement && textNode.parentElement.tagName === 'EM';
+      parts.forEach(function (part) {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else if (part) {
+          var span = document.createElement('span');
+          span.className = 'pt-word' + (isAccent ? ' pt-accent' : '');
+          span.style.cssText = 'display:inline-block';
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+
+    gsap.from('.principles-intro .chapter-label > *', {
+      opacity: 0, y: 14, stagger: 0.1, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: '#principles', start: 'top 60%' }
+    });
+    gsap.from('.pt-word', {
+      opacity: 0, y: 24, stagger: 0.045, duration: 1.2, ease: 'power4.out',
+      scrollTrigger: { trigger: '#principles', start: 'top 60%' }
+    });
+  })();
+
+  /* ── Principle sections reveal ── */
+  document.querySelectorAll('.principle-section').forEach(function(section) {
+    var isReverse = section.classList.contains('reverse');
+    gsap.fromTo(section.querySelector('.principle-text'),
+      { opacity: 0, x: isReverse ? 40 : -40 },
+      { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: section, start: 'top 38%' } }
+    );
+    gsap.fromTo(section.querySelector('.principle-photo img'),
+      { scale: 1.07 },
+      { scale: 1, duration: 1.6, ease: 'power3.out',
+        scrollTrigger: { trigger: section, start: 'top 80%' } }
+    );
+  });
+
+  /* ── Methods track entrance ── */
+  gsap.from('.methods-track-wrap', {
+    opacity: 0, y: 48,
+    duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.methods-track-wrap', start: 'top 68%' }
+  });
+  gsap.from('.mc, .mc-text', {
+    opacity: 0, y: 24,
+    stagger: 0.07, duration: 0.6, ease: 'power3.out',
+    scrollTrigger: { trigger: '.methods-track-wrap', start: 'top 65%' }
+  });
+
+  /* ── Methods arrow carousel ── */
+  (function () {
+    const track = document.querySelector('.methods-track');
+    const wrap  = document.querySelector('.methods-track-wrap');
+    const prev  = document.getElementById('methods-prev');
+    const next  = document.getElementById('methods-next');
+    let currentX = 0;
+
+    function getStep() {
+      const card = track.querySelector('.mc');
+      if (!card) return 300;
+      const gap = parseFloat(getComputedStyle(track).gap) || 20;
+      const cardW = card.offsetWidth + gap;
+      const padL  = parseFloat(getComputedStyle(wrap).paddingLeft) || 0;
+      const visibleW = wrap.clientWidth - padL * 2;
+      const count = Math.max(1, Math.floor(visibleW / cardW));
+      return count * cardW;
+    }
+
+    function getMaxX() {
+      const padL = parseFloat(getComputedStyle(wrap).paddingLeft) || 0;
+      return -(track.scrollWidth - wrap.clientWidth + padL);
+    }
+
+    function updateBtns() {
+      prev.disabled = currentX >= 0;
+      next.disabled = currentX <= getMaxX();
+    }
+
+    function slide(newX) {
+      currentX = Math.min(0, Math.max(getMaxX(), newX));
+      gsap.to(track, { x: currentX, duration: 0.85, ease: 'power2.inOut' });
+      updateBtns();
+    }
+
+    prev.addEventListener('click', function () { slide(currentX + getStep()); });
+    next.addEventListener('click', function () { slide(currentX - getStep()); });
+    updateBtns();
+  })();
+
+  /* ── Journey items alternate reveal ── */
+  document.querySelectorAll('.tl-item').forEach(function(item, i) {
+    gsap.from(item, {
+      opacity: 0, x: i % 2 === 0 ? -30 : 30,
+      duration: 1.4, ease: 'power2.out',
+      scrollTrigger: { trigger: item, start: 'top 65%' }
+    });
+  });
+
+  /* ── Journey images parallax ── */
+  document.querySelectorAll('.tl-img img').forEach(function(img) {
+    gsap.to(img, {
+      yPercent: -10, ease: 'none',
+      scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+    });
+  });
+
+  /* ── Reviews section reveal ── */
+  gsap.from('.reviews-hdr > *', {
+    opacity: 0, y: 28, stagger: 0.14, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '.reviews-hdr', start: 'top 80%' }
+  });
+
+  /* ── CTA reveal ── */
+  gsap.from('.cta-inner > *', {
+    opacity: 0, y: 36, stagger: 0.12, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#cta', start: 'top 75%' }
+  });
+
+  /* ── Counter animation ── */
+  function animateCount(el) {
+    const target = parseInt(el.dataset.val, 10);
+    const dur = target > 50 ? 1.8 : 1.2;
+    gsap.fromTo(el, { textContent: 0 }, {
+      textContent: target,
+      duration: dur,
+      ease: 'power2.out',
+      snap: { textContent: 1 },
+      onUpdate() { el.textContent = Math.round(parseFloat(el.textContent)); }
+    });
+  }
+
+  const counters = document.querySelectorAll('.count-up');
+  const animated = new Set();
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !animated.has(e.target)) {
+        animated.add(e.target);
+        animateCount(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObs.observe(c));
+
+  /* ── Methods header reveal ── */
+  (function () {
+    var h2 = document.querySelector('.methods-h2');
+    if (!h2) return;
+    var walker = document.createTreeWalker(h2, NodeFilter.SHOW_TEXT);
+    var textNodes = [];
+    var node;
+    while ((node = walker.nextNode())) textNodes.push(node);
+    textNodes.forEach(function (textNode) {
+      var parts = textNode.textContent.split(/(\s+)/);
+      var frag = document.createDocumentFragment();
+      var isAccent = textNode.parentElement && textNode.parentElement.tagName === 'EM';
+      parts.forEach(function (part) {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else if (part) {
+          var span = document.createElement('span');
+          span.className = 'mw-word' + (isAccent ? ' mw-accent' : '');
+          span.style.cssText = 'display:inline-block';
+          span.textContent = part;
+          frag.appendChild(span);
+        }
+      });
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+
+    gsap.fromTo('.mw-word',
+      { opacity: 0, y: 28 },
+      { opacity: 1, y: 0, stagger: 0.06, duration: 1.1, ease: 'power4.out',
+        scrollTrigger: { trigger: '.methods-header', start: 'top 55%' } }
+    );
+    gsap.fromTo('.methods-arrows',
+      { opacity: 0, x: 16 },
+      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '.methods-header', start: 'top 55%' } }
+    );
+  })();
+
+  /* ── Journey heading ── */
+  gsap.from('.journey-inner > h2', {
+    opacity: 0, y: 32, duration: 1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.journey-inner > h2', start: 'top 65%' }
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     SECTION TRANSITION CURTAINS
+     Each section gets a same-background-color veil that lifts
+     (scaleY 1→0, transform-origin bottom) as it scrolls into
+     view — "rising curtain" storytelling effect.
+     Content reveals top-first, matching natural reading flow.
+     ══════════════════════════════════════════════════════════ */
+  (function () {
+    /* Manifesto gets its own slow curtain so the hero→sunset reveal is gradual */
+    (function () {
+      var el = document.querySelector('#manifesto');
+      if (!el) return;
+      if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+      var veil = document.createElement('div');
+      veil.setAttribute('aria-hidden', 'true');
+      veil.style.cssText =
+        'position:absolute;inset:0;z-index:80;pointer-events:none;' +
+        'will-change:transform;transform-origin:bottom;background:#0A0604';
+      el.prepend(veil);
+      gsap.to(veil, {
+        scaleY: 0,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 98%',
+          end:   'top 22%',
+          scrub: 2.5,
+        }
+      });
+    })();
+
+
+    var curtains = [
+      { id: '#prologue',   color: '#F9F7F3' },
+      { id: '#pull-quote', color: '#ECEAE4' },
+      { id: '#methods',    color: '#F9F7F3' },
+      { id: '#journey',    color: '#F9F7F3' },
+      { id: '#reviews',    color: '#F9F7F3' },
+      { id: '#cta',        color: '#F9F7F3' },
+    ];
+
+    curtains.forEach(function (item) {
+      var el = document.querySelector(item.id);
+      if (!el) return;
+
+      if (getComputedStyle(el).position === 'static') {
+        el.style.position = 'relative';
+      }
+
+      var veil = document.createElement('div');
+      veil.setAttribute('aria-hidden', 'true');
+      veil.style.cssText =
+        'position:absolute;inset:0;z-index:80;pointer-events:none;' +
+        'will-change:transform;transform-origin:bottom;background:' + item.color;
+      el.prepend(veil);
+
+      gsap.to(veil, {
+        scaleY: 0,
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 98%',
+          end:   'top 76%',
+          scrub: 1,
+        }
+      });
+    });
+
+    /* Hero content: subtle fade + lift as hero scrolls out of view */
+    gsap.to('#hero .hero-content', {
+      y: -50,
+      opacity: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'bottom 65%',
+        end:   'bottom top',
+        scrub: 1.2,
+      }
+    });
+
+    /* Hero → Manifesto: hero background darkens before manifesto reveals */
+    gsap.to('.hero-exit-veil', {
+      opacity: 0.38,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'bottom 90%',
+        end:   'bottom -10%',
+        scrub: 3,
+      }
+    });
+
+    /* Manifesto: background image parallax zoom-in as section enters */
+    gsap.fromTo('.manifesto-bg img',
+      { scale: 1.13 },
+      { scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#manifesto',
+          start: 'top bottom',
+          end:   'top top',
+          scrub: 2,
+        }
+      }
+    );
+  })();
+</script>
+</body>
+</html>
