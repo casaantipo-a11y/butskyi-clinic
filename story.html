@@ -527,6 +527,19 @@
 
     /* ── Mobile ≤600px ── */
     @media (max-width: 600px) {
+      /* Hero: A) контент вище — flex-start з padding */
+      #hero {
+        justify-content: flex-start;
+        padding-top: 30dvh;
+      }
+      /* Hero: C) сильніший градієнт — контраст під текстом */
+      .hero-bg-overlay {
+        background: linear-gradient(to top,
+          rgba(249,247,243,0.88) 0%,
+          rgba(249,247,243,0.55) 35%,
+          rgba(249,247,243,0.18) 65%,
+          rgba(249,247,243,0.0) 85%);
+      }
       /* Hero: fix photo position + negative margins */
       .hero-bg img {
         transform: scale(1.1) translateY(-1.5rem);
@@ -538,7 +551,8 @@
       }
       .hero-eyebrow { margin-left: 0; letter-spacing: 0.08em; }
       .hero-eyebrow .hero-mob-wht { margin-left: -0.08em; }
-      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      /* Hero: B) статистика в один рядок */
+      .hero-stats { flex-wrap: nowrap; gap: 1rem; }
       .hero-cta-wrap { align-items: flex-start; }
       .hero-mob-white { color: #F5C842 !important; }
       .hero-mob-wht { color: #fff !important; }
