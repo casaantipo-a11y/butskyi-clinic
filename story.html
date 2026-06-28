@@ -251,8 +251,7 @@
     }
     .principle-h3 em { font-style: italic; font-weight: 300; color: var(--accent); }
     .principle-p { font-size: 0.9375rem; line-height: 1.85; color: var(--ink2); max-width: 460px; }
-    .principle-photo { overflow: hidden; position: relative; background: #E8E5DF; opacity: 0; }
-    .principle-text { opacity: 0; }
+    .principle-photo { overflow: hidden; position: relative; background: #E8E5DF; }
     .principle-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .principle-section:last-child .principle-photo::after {
       content: ''; position: absolute; bottom: 0; left: 0; right: 0;
@@ -509,7 +508,8 @@
       .principle-section { grid-template-columns: 1fr; min-height: auto; }
       .principle-section.reverse .principle-text { order: 0; }
       .principle-section.reverse .principle-photo { order: 0; }
-      .principle-photo { min-height: 60vw; }
+      .principle-photo { min-height: 60vw; opacity: 0; }
+      .principle-text { opacity: 0; }
 
       /* Journey */
       .tl-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -1051,25 +1051,42 @@
     });
   })();
 
-  /* ── Principle sections reveal: top → bottom sequential ── */
+  /* ── Principle sections reveal ── */
+  var isMobPrinciples = window.matchMedia('(max-width: 900px)').matches;
   document.querySelectorAll('.principle-section').forEach(function(section) {
-    var tl = gsap.timeline({
-      scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none none' }
-    });
-    tl.fromTo(section.querySelector('.principle-text'),
-        { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
-      )
-      .fromTo(section.querySelector('.principle-photo'),
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
-        '+=0.1'
-      )
-      .fromTo(section.querySelector('.principle-photo img'),
-        { scale: 1.07 },
-        { scale: 1, duration: 1.5, ease: 'power3.out' },
-        '<'
+    if (isMobPrinciples) {
+      /* Mobile: sequential top → bottom */
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none none' }
+      });
+      tl.fromTo(section.querySelector('.principle-text'),
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }
+        )
+        .fromTo(section.querySelector('.principle-photo'),
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
+          '+=0.1'
+        )
+        .fromTo(section.querySelector('.principle-photo img'),
+          { scale: 1.07 },
+          { scale: 1, duration: 1.5, ease: 'power3.out' },
+          '<'
+        );
+    } else {
+      /* Desktop: original side-by-side animation */
+      var isReverse = section.classList.contains('reverse');
+      gsap.fromTo(section.querySelector('.principle-text'),
+        { opacity: 0, x: isReverse ? 40 : -40 },
+        { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 38%' } }
       );
+      gsap.fromTo(section.querySelector('.principle-photo img'),
+        { scale: 1.07 },
+        { scale: 1, duration: 1.6, ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 80%' } }
+      );
+    }
   });
 
   /* ── Methods track entrance ── */
