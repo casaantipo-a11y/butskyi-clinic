@@ -525,11 +525,6 @@
       .mc, .mc-text { scroll-snap-align: start; }
     }
 
-    /* Hero stats: pre-hide for staggered mobile reveal */
-    @media (max-width: 768px) {
-      .hs { opacity: 0; }
-    }
-
     /* ── Mobile ≤600px ── */
     @media (max-width: 600px) {
       /* Hero: fix photo position + negative margins */
@@ -544,7 +539,6 @@
       .hero-eyebrow { margin-left: 0; letter-spacing: 0.08em; }
       .hero-eyebrow .hero-mob-wht { margin-left: -0.08em; }
       .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
-
       .hero-cta-wrap { align-items: flex-start; }
       .hero-mob-white { color: #F5C842 !important; }
       .hero-mob-wht { color: #fff !important; }
@@ -936,18 +930,9 @@
   const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   heroTl
     .fromTo('.hero-eyebrow', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.9, delay: 0.2 })
-    .fromTo('.hw', { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.13, duration: 1.5, ease: 'power2.out' }, '-=0.5');
-
-  if (window.matchMedia('(max-width: 768px)').matches) {
-    heroTl
-      .set('.hero-stats', { opacity: 1 })
-      .fromTo('.hs', { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.4, duration: 1.2, ease: 'power2.out' }, '-=1.9')
-      .to('.hero-scroll-hint', { opacity: 1, duration: 0.7 }, '-=0.3');
-  } else {
-    heroTl
-      .to('.hero-stats', { opacity: 1, y: 0, duration: 0.65 }, '-=1.0')
-      .to('.hero-scroll-hint', { opacity: 1, duration: 0.7 }, '-=0.5');
-  }
+    .fromTo('.hw', { opacity: 0, y: 18 }, { opacity: 1, y: 0, stagger: 0.13, duration: 1.5, ease: 'power2.out' }, '-=0.5')
+    .to('.hero-stats', { opacity: 1, y: 0, duration: 0.65 }, '-=1.0')
+    .to('.hero-scroll-hint', { opacity: 1, duration: 0.7 }, '-=0.5');
 
   /* ── Hero BG parallax ── */
   gsap.to('.hero-bg img', {
