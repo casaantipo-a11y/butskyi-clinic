@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Клініка Буцького — Лікування спини та суглобів у Полтаві</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,7 +163,7 @@
       background: rgba(10,6,4,0.52);
     }
     .manifesto-pin {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; min-height: 100svh; display: flex; align-items: center; justify-content: center;
       padding: clamp(2rem,4vw,4rem) clamp(2rem,8vw,8rem);
       position: relative; z-index: 2;
     }
@@ -382,22 +382,156 @@
     .ft-right { font-size: 0.7rem; color: var(--ink3); }
 
     /* ════════════════════════ RESPONSIVE ════════════════════════ */
+
+    /* ── Hamburger button ── */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.45rem 0.6rem;
+      border-radius: 9999px;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-burger:hover { background: rgba(26,22,18,0.06); }
+    .nav-burger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--ink); border-radius: 1px;
+      transition: transform 0.3s var(--ease-out), opacity 0.2s, transform 0.3s var(--ease-out);
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile full-screen menu ── */
+    .nav-mobile-menu {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 6900;
+      background: rgba(249,247,243,0.97);
+      backdrop-filter: blur(32px) saturate(150%);
+      -webkit-backdrop-filter: blur(32px) saturate(150%);
+      padding: 5rem 1.75rem 2.5rem;
+      transform: translateY(-102%);
+      transition: transform 0.4s var(--ease-out);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-mobile-menu.open { transform: translateY(0); }
+    .nav-mobile-menu ul { list-style: none; }
+    .nav-mobile-menu li { border-bottom: 1px solid var(--border); }
+    .nav-mobile-menu a {
+      display: block;
+      padding: 0.875rem 0;
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .nav-mobile-menu a:hover { color: var(--accent); padding-left: 0.5rem; }
+    .nav-mobile-cta { border-bottom: none !important; padding-top: 1.5rem; }
+    .nav-mobile-cta a {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.875rem 2rem;
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: 9999px;
+      font-family: var(--sans) !important;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+    .nav-mobile-cta a:hover { padding-left: 2rem; opacity: 0.88; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rv-track { animation: none; }
+    }
+
+    /* ── Tablet ≤900px ── */
     @media (max-width: 900px) {
+      /* Nav: remove fixed min-width, show burger */
+      nav {
+        min-width: unset;
+        width: calc(100% - 2rem);
+        grid-template-columns: 1fr auto;
+        padding-top: env(safe-area-inset-top, 0.4rem);
+      }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+
+      /* Prologue */
       .prologue-inner { grid-template-columns: 1fr; }
+
+      /* Principles */
       .principle-section { grid-template-columns: 1fr; min-height: auto; }
       .principle-section.reverse .principle-text { order: 0; }
       .principle-section.reverse .principle-photo { order: 0; }
       .principle-photo { min-height: 60vw; }
+
+      /* Journey */
       .tl-grid { grid-template-columns: 1fr; gap: 2rem; }
       .tl-grid::before { display: none; }
       .tl-item:nth-child(even) { margin-top: 0; }
+
+      /* Methods: switch to native touch scroll, hide arrow buttons */
       .methods-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .nav-links { display: none; }
+      .methods-arrows { display: none; }
+      .methods-track-wrap {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 1.5rem;
+      }
+      .mc, .mc-text { scroll-snap-align: start; }
     }
+
+    /* ── Mobile ≤600px ── */
     @media (max-width: 600px) {
-      h1.hero-h1 { font-size: clamp(2.5rem,12vw,4rem); }
-      .hero-meta { flex-direction: column; align-items: flex-start; }
+      /* Hero: fix photo position + negative margins */
+      .hero-bg img {
+        transform: scale(1.1) translateY(-1.5rem);
+        object-position: 38% 50%;
+      }
+      h1.hero-h1 {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-left: 0;
+      }
+      .hero-eyebrow { margin-left: 0; }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
       .hero-cta-wrap { align-items: flex-start; }
+
+      /* Manifesto */
+      .manifesto-pin { padding: 2rem 1.5rem; }
+
+      /* Pull quote */
+      #pull-quote { padding: 3rem 1.5rem; }
+
+      /* Prologue stats: collapse to 1 column on narrow screens */
+      .pr-stats { grid-template-columns: 1fr; }
+
+      /* Journey */
+      #journey { padding: 4rem 1.25rem 3rem; }
+      .journey-inner > h2 { font-size: clamp(2.25rem, 10vw, 3.5rem); margin-bottom: 2.5rem; }
+      .tl-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .tl-body { font-size: 1rem; }
+
+      /* CTA: stack buttons, collapse contacts */
+      #cta { padding: 3rem 1.25rem; }
+      .cta-btns { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-ghost { justify-content: center; }
+      .cta-contacts { flex-direction: column; align-items: center; gap: 1.25rem; }
+
+      /* Footer */
+      footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     }
   </style>
 </head>
@@ -406,9 +540,13 @@
 <div id="progress"></div>
 
 <nav>
-  <a href="index.html" class="nav-brand">
-    <span class="nav-brand-name">Буцький</span>
-    <span class="nav-brand-sub">Клініка · Полтава</span>
+  <a href="index.html" class="nav-brand" aria-label="Клініка Буцького — на головну">
+    <svg viewBox="0 0 140 34" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:auto;display:block" aria-hidden="true">
+      <rect x="0" y="1" width="28" height="28" rx="7" fill="#5E8A6E"/>
+      <text x="14" y="22" text-anchor="middle" font-family="'Cormorant Garamond',Georgia,serif" font-size="20" font-weight="700" fill="#F9F7F3">Б</text>
+      <text x="36" y="18" font-family="'Cormorant Garamond',Georgia,serif" font-size="18" font-weight="700" fill="#1C1814" letter-spacing="-0.5">уцький</text>
+      <text x="36" y="30" font-family="'Plus Jakarta Sans',system-ui,sans-serif" font-size="6.5" font-weight="600" fill="#A09890" letter-spacing="2">КЛІНІКА · ПОЛТАВА</text>
+    </svg>
   </a>
   <ul class="nav-links">
     <li><a href="#prologue">Про нас</a></li>
@@ -418,8 +556,21 @@
   </ul>
   <div class="nav-cta-wrap">
     <a href="#cta" class="nav-cta">Записатись</a>
+    <button class="nav-burger" id="nav-burger" aria-label="Відкрити меню" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="#prologue">Про нас</a></li>
+    <li><a href="#principles">Підхід</a></li>
+    <li><a href="#methods">Методи</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li class="nav-mobile-cta"><a href="#cta">Записатись →</a></li>
+  </ul>
+</div>
 
 <!-- ════════════════════════ HERO ════════════════════════ -->
 <section id="hero">
@@ -712,6 +863,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
   gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Mobile hamburger menu ── */
+  const burger = document.getElementById('nav-burger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+  burger.addEventListener('click', () => {
+    const isOpen = burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+    mobileMenu.setAttribute('aria-hidden', !isOpen);
+    burger.setAttribute('aria-label', isOpen ? 'Закрити меню' : 'Відкрити меню');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      burger.setAttribute('aria-label', 'Відкрити меню');
+    });
+  });
 
   /* ── Reading progress ── */
   window.addEventListener('scroll', () => {
