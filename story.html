@@ -527,7 +527,12 @@
 
     /* ── Mobile ≤600px ── */
     @media (max-width: 600px) {
-      /* Hero: fix photo position + negative margins */
+      /* Hero: compact height, nav-safe padding */
+      #hero {
+        min-height: 72dvh;
+        justify-content: flex-end;
+        padding-bottom: 2.5rem;
+      }
       .hero-bg img {
         transform: scale(1.1) translateY(-1.5rem);
         object-position: 38% 50%;
