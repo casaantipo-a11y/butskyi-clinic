@@ -1155,7 +1155,11 @@
       });
       tl.from(item, { opacity: 0, y: 24, duration: 1.1, ease: 'power2.out' });
       if (arrow && arrow.classList.contains('tl-arrow')) {
-        tl.to(arrow, { opacity: 0.55, y: 0, duration: 0.5, ease: 'power2.out' }, '+=0.05');
+        tl.fromTo(arrow,
+          { opacity: 0.55, clipPath: 'inset(0 0 100% 0)' },
+          { clipPath: 'inset(0 0 0% 0)', duration: 0.6, ease: 'power2.inOut' },
+          '+=0.05'
+        );
       }
     });
   } else {
