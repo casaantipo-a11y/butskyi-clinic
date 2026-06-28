@@ -966,15 +966,16 @@
       textNode.parentNode.replaceChild(frag, textNode);
     });
 
+    const isMob = window.matchMedia('(max-width: 768px)').matches;
     gsap.from('.m-word', {
       opacity: 0,
       y: 18,
-      stagger: 0.055,
-      duration: 1.1,
+      stagger: isMob ? 0.08 : 0.055,
+      duration: isMob ? 1.6 : 1.1,
       ease: 'power4.out',
       scrollTrigger: {
         trigger: '#manifesto',
-        start: window.matchMedia('(max-width: 768px)').matches ? 'top 40%' : 'top 65%'
+        start: isMob ? 'top 40%' : 'top 65%'
       }
     });
   })();
